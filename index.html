@@ -5,16 +5,18 @@
   
 
   
-  <title>Hexo</title>
+  <title>caitxj</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+  <meta name="description" content="caitxj blog">
+<meta property="og:type" content="website">
+<meta property="og:title" content="caitxj">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="caitxj">
+<meta property="og:description" content="caitxj blog">
 <meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="caitxj" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -33,7 +35,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
+        <a href="/" id="logo">caitxj</a>
       </h1>
       
     </div>
@@ -61,6 +63,48 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Postgresql运维" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/12/Postgresql%E8%BF%90%E7%BB%B4/" class="article-date">
+  <time datetime="2019-12-12T15:08:26.644Z" itemprop="datePublished">2019-12-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/12/Postgresql%E8%BF%90%E7%BB%B4/">Postgresql运维</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Postgresql运维"><a href="#Postgresql运维" class="headerlink" title="Postgresql运维"></a>Postgresql运维</h1><h4 id="pg-stat-activity-进程查看"><a href="#pg-stat-activity-进程查看" class="headerlink" title="pg_stat_activity(进程查看)"></a>pg_stat_activity(进程查看)</h4><p>查找导致锁表的查询</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select pid,usename,pg_blocking_pids(pid) as blocked_by,query as blocked_query from pg_stat_activity where cardinality(pg_blocking_pids(pid))&gt; 0</span><br></pre></td></tr></table></figure>
+
+<p>kill 进程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select pg_terminate_backend(pid) from pg_stat_activity where cardinality(pg_blocking_pids(pid))&gt; 0</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/12/Postgresql%E8%BF%90%E7%BB%B4/" data-id="ck42vu6yn0001tgul44reejoi" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Linux 常见命令使用手册" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/11/25/Linux%20%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/" class="article-date">
@@ -83,11 +127,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Linux-常见命令使用手册"><a href="#Linux-常见命令使用手册" class="headerlink" title="Linux 常见命令使用手册"></a>Linux 常见命令使用手册</h1><h2 id="常见命令"><a href="#常见命令" class="headerlink" title="常见命令"></a>常见命令</h2><h2 id="防火墙相关"><a href="#防火墙相关" class="headerlink" title="防火墙相关"></a>防火墙相关</h2><h2 id="磁盘管理-分区、格式、挂载"><a href="#磁盘管理-分区、格式、挂载" class="headerlink" title="磁盘管理(分区、格式、挂载)"></a>磁盘管理(分区、格式、挂载)</h2><h2 id="进程管理"><a href="#进程管理" class="headerlink" title="进程管理"></a>进程管理</h2>
+        <h2 id="常见命令"><a href="#常见命令" class="headerlink" title="常见命令"></a>常见命令</h2><h2 id="防火墙相关"><a href="#防火墙相关" class="headerlink" title="防火墙相关"></a>防火墙相关</h2><h2 id="磁盘管理-分区、格式、挂载"><a href="#磁盘管理-分区、格式、挂载" class="headerlink" title="磁盘管理(分区、格式、挂载)"></a>磁盘管理(分区、格式、挂载)</h2><h2 id="进程管理"><a href="#进程管理" class="headerlink" title="进程管理"></a>进程管理</h2>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/25/Linux%20%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/" data-id="ck3el55ow00006oul149g5lgo" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/25/Linux%20%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/" data-id="ck42vu6yf0000tgulhscoh77a" class="article-share-link">Share</a>
       
       
     </footer>
@@ -136,7 +180,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/24/hello-world/" data-id="ck3el55p900016oul8j8l1gt3" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/24/hello-world/" data-id="ck42vu6yr0002tgul13jbb3wz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -164,7 +208,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li></ul>
     </div>
   </div>
 
@@ -175,6 +219,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/12/12/Postgresql%E8%BF%90%E7%BB%B4/">Postgresql运维</a>
+          </li>
         
           <li>
             <a href="/2019/11/25/Linux%20%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/">Linux 常见命令使用手册</a>
@@ -196,7 +244,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2019 John Doe<br>
+      &copy; 2019 caitxj<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
