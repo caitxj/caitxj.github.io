@@ -7,14 +7,14 @@
   
   <title>Postgresql运维 | caitxj</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Postgresql运维pg_stat_activity(进程查看)查找导致锁表的查询 1select pid,usename,pg_blocking_pids(pid) as blocked_by,query as blocked_query from pg_stat_activity where cardinality(pg_blocking_pids(pid))&amp;gt; 0  kill 进程">
+  <meta name="description" content="Postgresql运维psql 常见命令 123psql -h -p \c dbName :切换数据库\d+ tableName:查看表接口    pg_stat_activity(进程查看)查找导致锁表的查询 1234select pid,usename,pg_blocking_pids(pid) as blocked_by,query as blocked_query from pg_sta">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Postgresql运维">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;12&#x2F;Postgresql%E8%BF%90%E7%BB%B4&#x2F;index.html">
 <meta property="og:site_name" content="caitxj">
-<meta property="og:description" content="Postgresql运维pg_stat_activity(进程查看)查找导致锁表的查询 1select pid,usename,pg_blocking_pids(pid) as blocked_by,query as blocked_query from pg_stat_activity where cardinality(pg_blocking_pids(pid))&amp;gt; 0  kill 进程">
+<meta property="og:description" content="Postgresql运维psql 常见命令 123psql -h -p \c dbName :切换数据库\d+ tableName:查看表接口    pg_stat_activity(进程查看)查找导致锁表的查询 1234select pid,usename,pg_blocking_pids(pid) as blocked_by,query as blocked_query from pg_sta">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-12T15:33:08.094Z">
+<meta property="og:updated_time" content="2019-12-27T11:42:50.358Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="caitxj" type="application/atom+xml">
@@ -84,17 +84,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Postgresql运维"><a href="#Postgresql运维" class="headerlink" title="Postgresql运维"></a>Postgresql运维</h1><h4 id="pg-stat-activity-进程查看"><a href="#pg-stat-activity-进程查看" class="headerlink" title="pg_stat_activity(进程查看)"></a>pg_stat_activity(进程查看)</h4><p>查找导致锁表的查询</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select pid,usename,pg_blocking_pids(pid) as blocked_by,query as blocked_query from pg_stat_activity where cardinality(pg_blocking_pids(pid))&gt; 0</span><br></pre></td></tr></table></figure>
+        <h1 id="Postgresql运维"><a href="#Postgresql运维" class="headerlink" title="Postgresql运维"></a>Postgresql运维</h1><p><strong>psql 常见命令</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">psql -h -p </span><br><span class="line">\c dbName :切换数据库</span><br><span class="line">\d+ tableName:查看表接口</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="pg-stat-activity-进程查看"><a href="#pg-stat-activity-进程查看" class="headerlink" title="pg_stat_activity(进程查看)"></a>pg_stat_activity(进程查看)</h4><p>查找导致锁表的查询</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select pid,usename,pg_blocking_pids(pid) as blocked_by,query as blocked_query from pg_stat_activity where cardinality(pg_blocking_pids(pid))&gt; 0</span><br><span class="line"></span><br><span class="line">-- 查看基于指定表操作的相关进程信息</span><br><span class="line">SELECT datname, pid,usename, query,state FROM pg_stat_activity where query ~ &apos;tableName&apos;</span><br></pre></td></tr></table></figure>
 
 <p>kill 进程</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select pg_terminate_backend(pid) from pg_stat_activity where cardinality(pg_blocking_pids(pid))&gt; 0</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">--结束进程(说明:如果存在pg服务器是分布式的,需要登录每个协调节点进行任务查看)</span><br><span class="line">select pg_terminate_backend(pid) </span><br><span class="line"></span><br><span class="line">select pg_terminate_backend(pid) from pg_stat_activity where cardinality(pg_blocking_pids(pid))&gt; 0</span><br></pre></td></tr></table></figure>
 
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/12/Postgresql%E8%BF%90%E7%BB%B4/" data-id="ck42vu6yn0001tgul44reejoi" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/12/Postgresql%E8%BF%90%E7%BB%B4/" data-id="ck4o3q9ar0002jwulhneqai7m" class="article-share-link">Share</a>
       
       
     </footer>
